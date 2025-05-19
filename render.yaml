@@ -10,14 +10,13 @@ services:
       - key: DJANGO_SETTINGS_MODULE
         value: core.settings
 
-  - type: web
-    name: frontend
-    env: docker
-    plan: free
-    dockerfilePath: frontend/Dockerfile
-    buildCommand: ""
-    # Remove startCommand!
-    envVars: []
+  type: web
+  name: frontend
+  env: docker
+  plan: free
+  dockerfilePath: frontend/Dockerfile
+  buildCommand: ""
+  envVars: []
 
   - type: redis
     name: redis
