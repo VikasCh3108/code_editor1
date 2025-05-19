@@ -5,7 +5,7 @@ services:
     plan: free
     dockerfilePath: backend/Dockerfile
     buildCommand: ""
-    startCommand: sh -c "python core/manage.py migrate && python core/manage.py runserver 0.0.0.0:8000"
+    # Remove startCommand! Render will use CMD from Dockerfile
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: core.settings
@@ -16,9 +16,12 @@ services:
     plan: free
     dockerfilePath: frontend/Dockerfile
     buildCommand: ""
-    startCommand: ""
+    # Remove startCommand!
     envVars: []
 
   - type: redis
     name: redis
     plan: free
+    ipAllowList: # Required by Render for Redis
+      - source: 0.0.0.0/0
+        description: Allow all (for dev/test, restrict for prod)
